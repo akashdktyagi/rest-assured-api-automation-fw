@@ -2,6 +2,9 @@
 package com.yantraQA.datamodels.pet;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.experimental.SuperBuilder;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +20,7 @@ import java.util.Map;
     "tags",
     "status"
 })
+@SuperBuilder(toBuilder = true)
 public class PetSchema {
 
     @JsonProperty("id")

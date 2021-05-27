@@ -113,6 +113,9 @@ public class ApiStepDefs {
 
         scenario.log(testContext.getReqBodyObj().toString());
 
+        PetSchema petSchema = new PetSchema();
+        PetSchema.builder().name("hvgh").category()
+
     }
 
     @Then("status as {int}")
