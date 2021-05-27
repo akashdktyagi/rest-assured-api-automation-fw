@@ -1,11 +1,7 @@
-package com.yantrQA.base;
+package com.yantraQA.base;
 
-import com.google.common.base.Splitter;
-import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.util.Map;
 
 @Getter
 @ToString

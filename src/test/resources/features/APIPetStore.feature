@@ -10,7 +10,7 @@ Feature: API Pet Store Feature
   @api
   Scenario: API pet store
     Given with request end point as "/pet"
-    And with request body as "pet"
+    And with request body json as "enter_full_json_here"
     When with method as "post"
     Then status as 200
 #    And response schema as "petSchema"

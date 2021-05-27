@@ -1,4 +1,4 @@
-package com.yantrQA.base;
+package com.yantraQA.base;
 
 public class GuiceConfig{// extends AbstractModule {
 

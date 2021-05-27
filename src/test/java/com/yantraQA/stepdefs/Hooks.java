@@ -1,7 +1,7 @@
-package com.yantrQA.stepdefs;
+package com.yantraQA.stepdefs;
 
 import com.google.inject.Inject;
-import com.yantrQA.base.TestContextAPI;
+import com.yantraQA.base.TestContextAPI;
 
 public class Hooks {
     @Inject

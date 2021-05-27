@@ -1,4 +1,4 @@
-package com.yantrQA.base;
+package com.yantraQA.base;
 
 import lombok.Getter;
 import lombok.Setter;

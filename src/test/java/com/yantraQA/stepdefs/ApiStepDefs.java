@@ -1,18 +1,18 @@
-package com.yantrQA.stepdefs;
+package com.yantraQA.stepdefs;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
-import com.yantrQA.base.APIAuth;
-import com.yantrQA.base.APIHeaders;
-import com.yantrQA.base.TestContextAPI;
+import com.yantraQA.base.APIAuth;
+import com.yantraQA.base.APIHeaders;
+import com.yantraQA.base.TestContextAPI;
+import com.yantraQA.datamodels.pet.PetSchema;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import lombok.extern.log4j.Log4j2;
-
 import static io.restassured.RestAssured.given;
 
 @Log4j2
@@ -75,8 +75,8 @@ public class ApiStepDefs {
         log.debug("API end Point used: " + endPoint);
     }
 
-    @Given("with request body as {string}")
-    public void with_request_body_as(String jsonBody) {
+    @Given("with request body json as {string}")
+    public void with_request_body_json_as(String jsonBody) throws JsonProcessingException {
         String body = "{\n" +
                 "  \"name\": \"akashDog\",\n" +
                 "  \"photoUrls\": [\n" +
@@ -84,9 +84,13 @@ public class ApiStepDefs {
                 "  ],\n" +
                 "  \"status\": \"available\"\n" +
                 "}";
+
+        testContext.setReqBodyObj(testContext.jsonToObject(body,new PetSchema()));
         testContext.reqSpec.body(body);
         scenario.log("Request body sent as: " + body);
         log.debug("Request body sent as: " + body);
+
+
     }
 
     @When("with method as {string}")
@@ -106,6 +110,8 @@ public class ApiStepDefs {
         testContext.response = testContext.reqSpec.when().post(testContext.endPointUrl);
         scenario.log("Response: " + testContext.response. asString());
         log.debug("Response received as: " + testContext.response. asString());
+
+        scenario.log(testContext.getReqBodyObj().toString());
 
     }
 
@@ -137,10 +143,5 @@ public class ApiStepDefs {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
-
-
-
-
-
 
 }

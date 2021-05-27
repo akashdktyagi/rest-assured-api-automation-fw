@@ -1,4 +1,4 @@
-package com.yantrQA.base;
+package com.yantraQA.base;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Maps;
