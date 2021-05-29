@@ -1,18 +1,24 @@
 package com.yantraQA.stepdefs;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.yantraQA.base.APIAuth;
 import com.yantraQA.base.APIHeaders;
 import com.yantraQA.base.TestContextAPI;
-import com.yantraQA.datamodels.pet.PetSchema;
+import com.yantraQA.datamodels.pet.request.Category;
+import com.yantraQA.datamodels.pet.request.PetSchema;
+import com.yantraQA.datamodels.pet.request.Tag;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.extern.log4j.Log4j2;
+
+import java.util.List;
+
+
 import static io.restassured.RestAssured.given;
 
 @Log4j2
@@ -75,23 +81,53 @@ public class ApiStepDefs {
         log.debug("API end Point used: " + endPoint);
     }
 
-    @Given("with request body json as {string}")
-    public void with_request_body_json_as(String jsonBody) throws JsonProcessingException {
-        String body = "{\n" +
-                "  \"name\": \"akashDog\",\n" +
-                "  \"photoUrls\": [\n" +
-                "    \"url_temp\"\n" +
-                "  ],\n" +
-                "  \"status\": \"available\"\n" +
-                "}";
-
-        testContext.setReqBodyObj(testContext.jsonToObject(body,new PetSchema()));
-        testContext.reqSpec.body(body);
-        scenario.log("Request body sent as: " + body);
-        log.debug("Request body sent as: " + body);
-
-
+    @Given("with request body json as")
+    public void with_request_body_json_as(String docString) {
+        testContext.reqSpec.body(docString);
+        scenario.log("Request body sent as: " + docString.toString());
+        log.debug("Request body sent as: " + docString.toString());
     }
+
+    @Given("with request body with default request builder for {string}")
+    public void with_request_body_with_default_builder(String builderName) {
+        //To Construct below Json using Builder pattern
+//        {
+//            "id": 1,
+//            "category": {
+//                      "id": 1,
+//                    "name": "bull_dog"
+//             },
+//            "name": "bull dog",
+//            "photoUrls": ["url_123", "url_2"],
+//            "tags": [
+//                {
+//                      "id": 1,
+//                    "name": "danny"
+//                }
+//               ],
+//            "status": "available"
+//        }
+
+//
+        //Construction of Request Body using Builder Pattern (Impl Done using Lombok and Jackson under datamodels.pet)
+        Category category = Category.builder().withId(1).withName("bull_dog").build();
+        Tag tags = Tag.builder().withId(1).withName("dog tag").build();
+        List<Tag> listTag = Lists.newArrayList(tags);
+        List<String> photoUrlList = Lists.newArrayList("url_1","url_2");
+
+        PetSchema petSchema = PetSchema.builder()
+                .withCategory(category)
+                .withName("bull dog")
+                .withPhotoUrls(photoUrlList)
+                .withTags(listTag)
+                .build();
+
+        scenario.log(petSchema.toString());
+        testContext.reqSpec.body(petSchema);
+        scenario.log("Request body sent as: " + petSchema.toString());
+        log.debug("Request body sent as: " + petSchema.toString());
+    }
+
 
     @When("with method as {string}")
     public void with_method_as(String method) {
@@ -108,13 +144,8 @@ public class ApiStepDefs {
                         "Incorrect HTTP verb sent :" + method);
 
         testContext.response = testContext.reqSpec.when().post(testContext.endPointUrl);
-        scenario.log("Response: " + testContext.response. asString());
-        log.debug("Response received as: " + testContext.response. asString());
-
-        scenario.log(testContext.getReqBodyObj().toString());
-
-        PetSchema petSchema = new PetSchema();
-        PetSchema.builder().name("hvgh").category()
+        scenario.log("Response: " + testContext.response.asString());
+        log.debug("Response received as: " + testContext.response.asString());
 
     }
 
@@ -132,7 +163,7 @@ public class ApiStepDefs {
 
     @Then("response contains string as {string}")
     public void response_contains_string_as(String string) {
-        //testContext.response. then().body("","");
+        //testContext.response.then().assertThat().
     }
 
     @Then("response contains key value pair as {string}")

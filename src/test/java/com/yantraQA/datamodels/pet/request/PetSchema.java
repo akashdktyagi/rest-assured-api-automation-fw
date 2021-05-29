@@ -1,9 +1,8 @@
 
-package com.yantraQA.datamodels.pet;
+package com.yantraQA.datamodels.pet.request;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import lombok.experimental.SuperBuilder;
+import lombok.Builder;
 import lombok.extern.jackson.Jacksonized;
 
 import java.util.ArrayList;
@@ -20,7 +19,8 @@ import java.util.Map;
     "tags",
     "status"
 })
-@SuperBuilder(toBuilder = true)
+@Builder(toBuilder = true,setterPrefix="with")
+@Jacksonized
 public class PetSchema {
 
     @JsonProperty("id")

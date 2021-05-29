@@ -1,7 +1,9 @@
 
-package com.yantraQA.datamodels.pet;
+package com.yantraQA.datamodels.pet.request;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.Builder;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +13,9 @@ import java.util.Map;
     "id",
     "name"
 })
-public class Category {
+@Builder(toBuilder = true,setterPrefix="with")
+@Jacksonized
+public class Tag {
 
     @JsonProperty("id")
     private Integer id;
@@ -53,7 +57,7 @@ public class Category {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Category.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(Tag.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("id");
         sb.append('=');
         sb.append(((this.id == null)?"<null>":this.id));
@@ -88,10 +92,10 @@ public class Category {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Category) == false) {
+        if ((other instanceof Tag) == false) {
             return false;
         }
-        Category rhs = ((Category) other);
+        Tag rhs = ((Tag) other);
         return ((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))));
     }
 
