@@ -1,5 +1,6 @@
 package com.yantraQA.stepdefs;
 
+import com.atlassian.oai.validator.restassured.OpenApiValidationFilter;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -9,20 +10,18 @@ import com.yantraQA.base.TestContextAPI;
 import com.yantraQA.datamodels.pet.request.Category;
 import com.yantraQA.datamodels.pet.request.PetSchema;
 import com.yantraQA.datamodels.pet.request.Tag;
-import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.extern.log4j.Log4j2;
-
 import java.util.List;
-
-
 import static io.restassured.RestAssured.given;
 
 @Log4j2
 public class ApiStepDefs1 {
+
+
+
 
     TestContextAPI testContext;
     Scenario scenario;
@@ -32,6 +31,13 @@ public class ApiStepDefs1 {
         this.testContext = testContext;
         scenario = testContext.getScenario();
         log.debug("Test Context injected in API Step Def constructor and instance variables assigned.");
+    }
+
+    @Given("with swagger schema validation path as {string}")
+    public void with_swagger_schema_validation_path_as(String headersAsStringKeyVal) {
+        //String SWAGGER_JSON_URL = "http://petstore.swagger.io/v2/swagger.json";
+        OpenApiValidationFilter validationFilter = new OpenApiValidationFilter("swagger/swagger.json");
+        this.testContext.reqSpec.filter(validationFilter);
     }
 
     @Given("with header as {string}")

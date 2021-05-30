@@ -6,6 +6,7 @@ Feature: API Pet Store Feature
   Background: API Authorization
     Given with authorization mechanism as "na"
     And with header as "default"
+    And with swagger schema validation path as ""
 
   Scenario: Client is able to hit the "/pet" endpoint to register his pet using http "post" verb. (Example: Request as JSON in feature.)
     Given with request end point as "/pet"
