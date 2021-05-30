@@ -16,7 +16,8 @@
     
 
 * Use Swagger rest assured lib for validating the request response or schema:
-  https://bitbucket.org/atlassian/swagger-request-validator/src/master/swagger-request-validator-examples/src/test/java/com/atlassian/oai/validator/examples/restassured/OpenApiValidationFilterTestExample.java?at=master
+  * https://bitbucket.org/atlassian/swagger-request-validator/src/master/swagger-request-validator-restassured/
+  * https://bitbucket.org/atlassian/swagger-request-validator/src/master/swagger-request-validator-examples/src/test/java/com/atlassian/oai/validator/examples/restassured/OpenApiValidationFilterTestExample.java?at=master
   * Example on How to use it: (fetched from above link)
   
 ```java

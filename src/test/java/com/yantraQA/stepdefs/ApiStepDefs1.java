@@ -22,18 +22,13 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 
 @Log4j2
-public class ApiStepDefs {
+public class ApiStepDefs1 {
 
     TestContextAPI testContext;
     Scenario scenario;
 
-    @Before
-    public void setUp(Scenario s){
-        testContext.setScenario(s);
-    }
-
     @Inject
-    public ApiStepDefs(TestContextAPI testContext){
+    public ApiStepDefs1(TestContextAPI testContext){
         this.testContext = testContext;
         scenario = testContext.getScenario();
         log.debug("Test Context injected in API Step Def constructor and instance variables assigned.");
@@ -147,35 +142,6 @@ public class ApiStepDefs {
         scenario.log("Response: " + testContext.response.asString());
         log.debug("Response received as: " + testContext.response.asString());
 
-    }
-
-    @Then("status as {int}")
-    public void status_as(Integer statusCode) {
-        testContext.response. then().statusCode(statusCode);
-        scenario.log("Status code successfully to be validated: " + statusCode);
-        log.debug("Status code as expected: " + statusCode);
-    }
-
-    @Then("response schema as {string}")
-    public void response_schema_as(String string) {
-
-    }
-
-    @Then("response contains string as {string}")
-    public void response_contains_string_as(String string) {
-        //testContext.response.then().assertThat().
-    }
-
-    @Then("response contains key value pair as {string}")
-    public void response_contains_key_value_pair_as(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-
-    @Then("response contains data structure as {string}")
-    public void response_contains_data_structure_as(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
     }
 
 }
