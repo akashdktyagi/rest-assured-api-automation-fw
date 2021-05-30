@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
 import lombok.Setter;
+import org.assertj.core.api.SoftAssertions;
 
 import static io.restassured.RestAssured.given;
 
@@ -22,6 +23,8 @@ public class TestContextAPI {
     @Inject
     @Getter
     @Setter Config config;
+    @Getter
+    SoftAssertions softAssertions = new SoftAssertions();
 
     //API specific Control
     public RequestSpecification reqSpec;

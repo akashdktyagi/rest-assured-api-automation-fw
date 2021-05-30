@@ -40,20 +40,14 @@ public class ApiStepDefs2 {
         log.debug("Status code as expected: " + statusCode);
     }
 
-    @Then("response schema as {string}")
-    public void response_schema_as(String string) {
-
-    }
-
     @Then("response contains string as {string}")
     public void response_contains_string_as(String string) {
-        //testContext.response.then().assertThat().
+       testContext.getSoftAssertions().assertThat(1).as("1 equal 1").isEqualTo(1);
     }
 
     @Then("response contains key value pair as {string}")
     public void response_contains_key_value_pair_as(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        testContext.getSoftAssertions().assertThat(1).as("1 not equal 1").isEqualTo(2);
     }
 
     @Then("response contains data structure as {string}")

@@ -14,14 +14,13 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import lombok.extern.log4j.Log4j2;
+import org.assertj.core.api.SoftAssertions;
+
 import java.util.List;
 import static io.restassured.RestAssured.given;
 
 @Log4j2
 public class ApiStepDefs1 {
-
-
-
 
     TestContextAPI testContext;
     Scenario scenario;
@@ -110,7 +109,7 @@ public class ApiStepDefs1 {
 //        }
 
 //
-        //Construction of Request Body using Builder Pattern (Impl Done using Lombok and Jackson under datamodels.pet)
+        //Construction of Request Body using Builder Pattern (Impl Done using Lombok and Jackson under datamodels.pet package)
         Category category = Category.builder().withId(1).withName("bull_dog").build();
         Tag tags = Tag.builder().withId(1).withName("dog tag").build();
         List<Tag> listTag = Lists.newArrayList(tags);
